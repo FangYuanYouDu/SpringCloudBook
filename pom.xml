@@ -9,6 +9,8 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>eureka-server</module>
+        <module>user-service</module>
+        <module>consumer-demo</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -27,6 +29,7 @@
         <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
         <mapper.starter.version>2.1.5</mapper.starter.version>
         <mysql.verison>5.1.48</mysql.verison>
+        <springdata.jpa.version>2.1.5.RELEASE</springdata.jpa.version>
     </properties>
 
     <dependencyManagement>
@@ -38,6 +41,7 @@
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
+                <!-- 后续有工程应用到spring cloud时，不用再声明版本号 -->
                 <scope>import</scope>
             </dependency>
 
@@ -60,37 +64,23 @@
                 <artifactId>spring-cloud-starter-config</artifactId>
             </dependency>
 
+            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jpa</artifactId>
+                <version>${springdata.jpa.version}</version>
+            </dependency>
+
+
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
 
-        <!--<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>-->
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-
-        <!--<dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-server</artifactId>
-            <version>2.2.2</version>
-        </dependency>-->
 
     </dependencies>
 
