@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -49,5 +51,12 @@ public class UserController {
     @DeleteMapping("/{userId}")
     public void deleteUserById(@PathVariable Integer userId){
         userRepository.deleteById(userId);
+    }
+
+    //根据时间查询的话 需要传一个timestamp 10位的
+    @GetMapping
+    public List<User> queryByDatetime(@RequestParam Timestamp startTime,@RequestParam Timestamp endTime){
+        System.out.println(startTime);
+        return userRepository.findUsersByCreateTimeBetweenOrderByCreateTimeDesc(startTime, endTime);
     }
 }
