@@ -2,8 +2,15 @@ package com.langri.controller;
 
 import com.langri.bean.User;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 /**
  * @author FangYuan
@@ -15,10 +22,26 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 public class ConsumerController {
 
+    @Bean
+    @LoadBalanced
+    RestTemplate restTemplate(){
+        return new RestTemplate();
+    }
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Autowired
+    private DiscoveryClient discoveryClient;
+
     @GetMapping("/{userId}")
     public User getUserById(@PathVariable Long userId){
-        RestTemplate restTemplate = new RestTemplate();
-        String url = "http://127.0.0.1:8091/user/"+userId;
+        /*List<ServiceInstance> instances = discoveryClient.getInstances("user-service");
+        ServiceInstance instance = instances.get(0);
+
+        String url = "http://"+instance.getHost()+":"+instance.getPort()+"/user/"+userId;*/
+
+        String url = "http://user-service/user/"+userId;
         return restTemplate.getForObject(url, User.class);
     }
 }

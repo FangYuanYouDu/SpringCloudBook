@@ -1,0 +1,22 @@
+
+#配置高可用的eureka（多台eureka服务）
+
+server:
+  # 虚拟机里如果有提供port 则用虚拟机里的 没有就用10086
+  port: ${port:10086}
+
+spring:
+  application:
+    name: eureka-server
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    # 不将自己注册到服务中心 （集群需要注册到其他eureka服务中）
+    #register-with-eureka: false
+    # 不拉取自身服务 （集群需要让其他eureka拉取自己的服务）
+    #fetch-registry: false
+    # 服务地址
+    service-url:
+      # 虚拟机里如果有提供defaultZone 则用虚拟机里的 没有就用配置文件里的
+      defaultZone: ${defaultZone:http://${eureka.instance.hostname}:${server.port}/eureka}
