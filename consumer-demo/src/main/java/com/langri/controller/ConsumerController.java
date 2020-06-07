@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
 
 /**
  * @author FangYuan
@@ -22,6 +21,7 @@ import java.util.List;
 @Slf4j
 public class ConsumerController {
 
+    //添加负载均衡配置
     @Bean
     @LoadBalanced
     RestTemplate restTemplate(){
