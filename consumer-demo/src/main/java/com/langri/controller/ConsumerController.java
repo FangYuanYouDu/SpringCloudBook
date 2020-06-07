@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-
 /**
  * @author FangYuan
  * 2020/6/1 11:02
